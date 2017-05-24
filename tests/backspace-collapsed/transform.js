@@ -1,3 +1,5 @@
+const expect = require('expect');
+
 module.exports = function(plugin, state) {
     const blockStart = state.document.getDescendant('anchor');
 
@@ -5,7 +7,7 @@ module.exports = function(plugin, state) {
         .collapseToStartOf(blockStart)
         .apply();
 
-    return plugin.onKeyDown(
+    const result = plugin.onKeyDown(
         {
             preventDefault() {},
             stopPropagation() {}
@@ -13,4 +15,7 @@ module.exports = function(plugin, state) {
         { key: 'backspace' },
         withCursor
     );
+
+    expect(result).toBe(undefined);
+    return state;
 };
