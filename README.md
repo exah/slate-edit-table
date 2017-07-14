@@ -20,7 +20,7 @@ npm install @exah/slate-edit-table
 ### Simple Usage
 
 ```js
-import EditTable from 'slate-edit-table'
+import EditTable from '@exah/slate-edit-table'
 
 const plugins = [
   EditTable()
