@@ -5,39 +5,43 @@ const PluginEditTable = require('../lib/');
 
 const stateJson = require('./state');
 
-const tablePlugin = PluginEditTable();
+const tablePlugin = PluginEditTable({
+    onTabCreateRow: false,
+    onEnterCreateRow: false,
+    typeDefault: 'paragraph'
+});
 const plugins = [
     tablePlugin
 ];
 
 const schema = {
     nodes: {
-        table:      props => <table><tbody {...props.attributes}>{props.children}</tbody></table>,
-        table_row:  props => <tr {...props.attributes}>{props.children}</tr>,
-        table_cell: (props) => {
-            let align = props.node.get('data').get('align') || 'left'
+        table: props => <table><tbody {...props.attributes}>{props.children}</tbody></table>,
+        table_row: props => <tr {...props.attributes}>{props.children}</tr>,
+        table_cell: props => {
+            const align = props.node.get('data').get('align') || 'left';
             return <td style={{ textAlign: align }} {...props.attributes}>{props.children}</td>;
         },
-        paragraph:  props => <p {...props.attributes}>{props.children}</p>,
-        heading:    props => <h1 {...props.attributes}>{props.children}</h1>
+        paragraph: props => <p {...props.attributes}>{props.children}</p>,
+        heading: props => <h1 {...props.attributes}>{props.children}</h1>
     }
 };
 
 const Example = React.createClass({
-    getInitialState: function() {
+    getInitialState() {
         return {
             state: Slate.Raw.deserialize(stateJson, { terse: true })
         };
     },
 
-    onChange: function(state) {
+    onChange(state) {
         this.setState({
-            state: state
+            state
         });
     },
 
-    onInsertTable: function() {
-        let { state } = this.state;
+    onInsertTable() {
+        const { state } = this.state;
 
         this.onChange(
             tablePlugin.transforms.insertTable(state.transform())
@@ -45,8 +49,8 @@ const Example = React.createClass({
         );
     },
 
-    onInsertColumn: function() {
-        let { state } = this.state;
+    onInsertColumn() {
+        const { state } = this.state;
 
         this.onChange(
             tablePlugin.transforms.insertColumn(state.transform())
@@ -54,8 +58,8 @@ const Example = React.createClass({
         );
     },
 
-    onInsertRow: function() {
-        let { state } = this.state;
+    onInsertRow() {
+        const { state } = this.state;
 
         this.onChange(
             tablePlugin.transforms.insertRow(state.transform())
@@ -63,8 +67,8 @@ const Example = React.createClass({
         );
     },
 
-    onRemoveColumn: function() {
-        let { state } = this.state;
+    onRemoveColumn() {
+        const { state } = this.state;
 
         this.onChange(
             tablePlugin.transforms.removeColumn(state.transform())
@@ -72,8 +76,8 @@ const Example = React.createClass({
         );
     },
 
-    onRemoveRow: function() {
-        let { state } = this.state;
+    onRemoveRow() {
+        const { state } = this.state;
 
         this.onChange(
             tablePlugin.transforms.removeRow(state.transform())
@@ -81,8 +85,8 @@ const Example = React.createClass({
         );
     },
 
-    onRemoveTable: function() {
-        let { state } = this.state;
+    onRemoveTable() {
+        const { state } = this.state;
 
         this.onChange(
             tablePlugin.transforms.removeTable(state.transform())
@@ -90,8 +94,8 @@ const Example = React.createClass({
         );
     },
 
-    onSetAlign: function (event, align) {
-        let { state } = this.state;
+    onSetAlign(event, align) {
+        const { state } = this.state;
 
         this.onChange(
             tablePlugin.transforms.setColumnAlign(state.transform(), align)
@@ -99,7 +103,7 @@ const Example = React.createClass({
         );
     },
 
-    renderNormalToolbar: function() {
+    renderNormalToolbar() {
         return (
             <div>
                 <button onClick={this.onInsertTable}>Insert Table</button>
@@ -107,7 +111,7 @@ const Example = React.createClass({
         );
     },
 
-    renderTableToolbar: function() {
+    renderTableToolbar() {
         return (
             <div>
                 <button onClick={this.onInsertColumn}>Insert Column</button>
@@ -116,20 +120,20 @@ const Example = React.createClass({
                 <button onClick={this.onRemoveRow}>Remove Row</button>
                 <button onClick={this.onRemoveTable}>Remove Table</button>
                 <br />
-                <button onClick={(e) => this.onSetAlign(e, 'left') }>Set align left</button>
-                <button onClick={(e) => this.onSetAlign(e, 'center') }>Set align center</button>
-                <button onClick={(e) => this.onSetAlign(e, 'right') }>Set align right</button>
+                <button onClick={e => this.onSetAlign(e, 'left') }>Set align left</button>
+                <button onClick={e => this.onSetAlign(e, 'center') }>Set align center</button>
+                <button onClick={e => this.onSetAlign(e, 'right') }>Set align right</button>
             </div>
         );
     },
 
-    render: function() {
-        let { state } = this.state;
-        let isTable = tablePlugin.utils.isSelectionInTable(state);
+    render() {
+        const { state } = this.state;
+        const isTable = tablePlugin.utils.isSelectionInTable(state);
 
         return (
             <div>
-                {isTable? this.renderTableToolbar() : this.renderNormalToolbar()}
+                {isTable ? this.renderTableToolbar() : this.renderNormalToolbar()}
                 <Slate.Editor
                     placeholder={'Enter some text...'}
                     plugins={plugins}
