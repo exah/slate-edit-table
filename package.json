@@ -1,7 +1,7 @@
 {
   "name": "@exah/slate-edit-table",
   "description": "A Slate plugin to handle keyboard events in tables.",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "license": "Apache-2.0",
   "repository": "exah/slate-edit-table",
   "main": "./dist/index.js",
