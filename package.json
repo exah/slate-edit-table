@@ -24,6 +24,7 @@
     "gh-pages": "^1.0.0",
     "http-server": "^0.10.0",
     "mocha": "^3.4.2",
+    "npm-run-all": "^4.0.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "read-metadata": "^1.0.0",
@@ -31,17 +32,20 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "prepublish": "npm run build",
-    "postpublish": "npm run deploy-example",
-    "lint": "eslint ./",
-    "build": "NODE_ENV=production babel ./lib --out-dir ./dist",
-    "build:watch": "NODE_ENV=production babel -w ./lib --out-dir ./dist",
-    "build-example": "browserify ./example/main.js -o ./example/bundle.js -t [ babelify --presets [ es2015 react ] ]",
-    "watch-example": "watchify ./example/main.js -o ./example/bundle.js -t [ babelify --presets [ es2015 react ] ] -v",
-    "serve-example": "http-server ./example/ -p 8080",
-    "start": "npm run build-example; npm run serve-example",
-    "deploy-example": "npm run build-example; gh-pages -d ./example",
-    "test": "./node_modules/.bin/mocha ./tests/*.js --compilers js:babel-register --reporter=list"
+    "start": "npm run build:example; npm run example",
+    "dev": "run-p watch:* example",
+    "test": "mocha ./tests/*.js --compilers js:babel-register --reporter=list",
+    "lint": "eslint .",
+    "example": "http-server ./example/ -p 8080",
+    "watch": "run-p watch:*",
+    "build": "run-s build:*",
+    "build:module": "NODE_ENV=production babel ./lib --out-dir ./dist",
+    "build:example": "browserify ./example/main.js -o ./example/bundle.js -t [ babelify --presets [ es2015 react ] ]",
+    "watch:module": "NODE_ENV=production babel -w ./lib --out-dir ./dist",
+    "watch:example": "watchify ./example/main.js -o ./example/bundle.js -t [ babelify --presets [ es2015 react ] ] -v",
+    "gh-pages": "npm run build:example; gh-pages -d ./example",
+    "prepublish": "npm run build:module",
+    "postpublish": "npm run gh-pages"
   },
   "keywords": [
     "slate"
