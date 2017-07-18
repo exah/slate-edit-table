@@ -7,7 +7,8 @@ const stateJson = require('./state');
 
 const tablePlugin = PluginEditTable({
     onTabCreateRow: false,
-    onEnterCreateRow: false
+    onEnterCreateRow: false,
+    typeDefault: 'paragraph'
 });
 const plugins = [
     tablePlugin
