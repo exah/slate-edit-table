@@ -24,6 +24,7 @@
     "gh-pages": "^1.0.0",
     "http-server": "^0.10.0",
     "mocha": "^3.4.2",
+    "np": "^2.16.0",
     "npm-run-all": "^4.0.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -44,8 +45,8 @@
     "watch:module": "NODE_ENV=production babel -w ./lib --out-dir ./dist",
     "watch:example": "watchify ./example/main.js -o ./example/bundle.js -t [ babelify --presets [ es2015 react ] ] -v",
     "gh-pages": "npm run build:example; gh-pages -d ./example",
-    "prepublish": "npm run build:module",
-    "postpublish": "npm run gh-pages"
+    "deploy": "np --any-branch",
+    "postdeploy": "npm run gh-pages"
   },
   "keywords": [
     "slate"
