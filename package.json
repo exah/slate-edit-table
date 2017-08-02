@@ -43,7 +43,7 @@
     "build:module": "NODE_ENV=production babel ./lib --out-dir ./dist",
     "build:example": "browserify ./example/main.js -o ./example/bundle.js -t [ babelify --presets [ es2015 react ] ]",
     "watch:module": "NODE_ENV=production babel -w ./lib --out-dir ./dist",
-    "watch:example": "watchify ./example/main.js -o ./example/bundle.js -t [ babelify --presets [ es2015 react ] ] -v",
+    "watch:example": "watchify ./example/main.js -o ./example/bundle.js -t [ babelify --presets [ es2015 react ] ] -v --poll",
     "gh-pages": "npm run build:example; gh-pages -d ./example",
     "deploy": "np --any-branch",
     "postdeploy": "npm run gh-pages"
