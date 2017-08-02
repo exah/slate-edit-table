@@ -723,7 +723,6 @@ var onBackspace = require('./onBackspace');
 var onUpDown = require('./onUpDown');
 var ALIGN = require('./ALIGN');
 var makeSchema = require('./makeSchema');
-var findBlock = require('./findBlock');
 
 var KEY_ENTER = 'enter';
 var KEY_TAB = 'tab';
@@ -752,10 +751,10 @@ function EditTable() {
      */
     function isSelectionInTable(state) {
         if (!state.selection.startKey) return false;
-        var block = findBlock(opts.typeCell, state, state.startBlock);
+        var tableBlock = state.document.getFurthestBlock(state.startBlock.key);
 
         // Only handle events in cells
-        return block != null;
+        return tableBlock && tableBlock.type === opts.typeTable;
     }
 
     /**
@@ -833,7 +832,7 @@ EditTable.ALIGN = ALIGN;
 
 module.exports = EditTable;
 
-},{"./ALIGN":3,"./findBlock":9,"./makeSchema":11,"./onBackspace":12,"./onEnter":13,"./onTab":14,"./onUpDown":15,"./transforms/insertColumn":16,"./transforms/insertRow":17,"./transforms/insertTable":18,"./transforms/moveSelection":19,"./transforms/moveSelectionBy":20,"./transforms/removeColumn":21,"./transforms/removeRow":22,"./transforms/removeTable":23,"./transforms/setColumnAlign":24}],11:[function(require,module,exports){
+},{"./ALIGN":3,"./makeSchema":11,"./onBackspace":12,"./onEnter":13,"./onTab":14,"./onUpDown":15,"./transforms/insertColumn":16,"./transforms/insertRow":17,"./transforms/insertTable":18,"./transforms/moveSelection":19,"./transforms/moveSelectionBy":20,"./transforms/removeColumn":21,"./transforms/removeRow":22,"./transforms/removeTable":23,"./transforms/setColumnAlign":24}],11:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -855,7 +854,39 @@ var createAlign = require('./createAlign');
  */
 function makeSchema(opts) {
     return {
-        rules: [cellsWithinTable(opts), rowsWithinTable(opts), tablesContainOnlyRows(opts), rowsContainRequiredColumns(opts), tableContainAlignData(opts)].concat(_toConsumableArray(opts.typeDefault != null ? [cellsContainBlocks(opts)] : []))
+        rules: [cellsWithinTable(opts), rowsWithinTable(opts), tablesContainOnlyRows(opts), rowsContainRequiredColumns(opts), tableContainAlignData(opts), tableIsAtTopLevel(opts)].concat(_toConsumableArray(opts.typeDefault != null ? [cellsContainBlocks(opts)] : []))
+    };
+}
+
+/**
+ * Rule to ensure table is at top (document) level
+ *
+ * @param {String} opts.typeTable The type of table blocks
+ * @param {String} opts.typeRow The type of row blocks
+ * @return {Object} rule
+ */
+
+function tableIsAtTopLevel(opts) {
+    return {
+        match: function match(node) {
+            return node.kind === 'block' && node.type !== opts.typeTable;
+        },
+        validate: function validate(block) {
+            var invalid = block.nodes.filter(function (n) {
+                return n.type === opts.typeTable;
+            });
+            return invalid.size ? invalid : null;
+        },
+        normalize: function normalize(transform, block, invalid) {
+            var document = transform.state.document;
+
+            var index = document.nodes.findIndex(function (n) {
+                return n.key === block.key;
+            });
+            return invalid.reduce(function (tr, n) {
+                return tr.moveNodeByKey(n.key, document.key, index);
+            }, transform);
+        }
     };
 }
 
@@ -1038,14 +1069,8 @@ function rowsContainRequiredColumns(opts) {
             }, 1); // Min 1 column
 
 
-            var valid = rows.every(function (row) {
-                return columns === countCells(row);
-            });
-            if (valid) {
-                return null;
-            }
             // else normalize, by padding with empty cells
-            return rows.map(function (row) {
+            var invalidRows = rows.map(function (row) {
                 var cells = countCells(row);
                 var invalids = row.nodes.filterNot(isCell);
 
@@ -1061,6 +1086,8 @@ function rowsContainRequiredColumns(opts) {
                     add: columns - cells
                 };
             }).filter(Boolean);
+
+            return invalidRows.size > 0 ? invalidRows : null;
         },
 
 
