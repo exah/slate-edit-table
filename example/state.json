@@ -41,10 +41,28 @@
                             "type": "table_cell",
                             "nodes": [
                                 {
-                                    "kind": "text",
-                                    "ranges": [
+                                    "kind": "block",
+                                    "type": "table",
+                                    "nodes": [
                                         {
-                                            "text": "Col 1"
+                                            "kind": "block",
+                                            "type": "table_row",
+                                            "nodes": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "table_cell",
+                                                    "nodes": [
+                                                      {
+                                                          "kind": "text",
+                                                          "ranges": [
+                                                              {
+                                                                  "text": "Col 1"
+                                                              }
+                                                          ]
+                                                      }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
