@@ -15,22 +15,6 @@ nodes:
             nodes:
               - kind: text
                 text: ""
-  # Poped out of table
-  - kind: block
-    type: table
-    data:
-      align:
-        - left
-    nodes:
-      # Row 2
-      - kind: block
-        type: table_row
-        nodes:
-          - kind: block
-            type: table_cell
-            nodes:
-              - kind: text
-                text: "Row 2, Col 1"
   - kind: block
     type: table
     data:
@@ -55,3 +39,19 @@ nodes:
             nodes:
               - kind: text
                 text: "Row 3, Col 1"
+  # Poped out of table
+  - kind: block
+    type: table
+    data:
+      align:
+        - left
+    nodes:
+      # Row 2
+      - kind: block
+        type: table_row
+        nodes:
+          - kind: block
+            type: table_cell
+            nodes:
+              - kind: text
+                text: "Row 2, Col 1"

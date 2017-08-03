@@ -24,6 +24,7 @@ describe('slate-edit-table', function() {
             const newState = runTransform(plugin, stateInput);
 
             const newDocJSon = Slate.Raw.serialize(newState, { terse: true });
+
             expect(newDocJSon).toEqual(expected);
         });
     });
