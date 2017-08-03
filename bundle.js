@@ -880,11 +880,12 @@ function tableIsAtTopLevel(opts) {
         normalize: function normalize(transform, block, invalid) {
             var document = transform.state.document;
 
+            var furthest = document.getFurthestBlock(block.key);
             var index = document.nodes.findIndex(function (n) {
-                return n.key === block.key;
+                return n.key === furthest.key;
             });
             return invalid.reduce(function (tr, n) {
-                return tr.moveNodeByKey(n.key, document.key, index);
+                return tr.moveNodeByKey(n.key, document.key, index + 1);
             }, transform);
         }
     };
