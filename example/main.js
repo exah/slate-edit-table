@@ -30,7 +30,7 @@ const schema = {
 const Example = React.createClass({
     getInitialState() {
         return {
-            state: Slate.Raw.deserialize(stateJson, { terse: true })
+            state: Slate.State.fromJSON(stateJson)
         };
     },
 
