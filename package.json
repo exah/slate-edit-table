@@ -46,6 +46,7 @@
     "watch:example": "watchify ./example/main.js -o ./example/bundle.js -t [ babelify --presets [ es2015 react ] ] -v --poll",
     "gh-pages": "npm run build:example; gh-pages -d ./example",
     "deploy": "np --any-branch",
+    "preversion": "npm run build:module",
     "postdeploy": "npm run gh-pages"
   },
   "keywords": [
