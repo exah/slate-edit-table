@@ -9,7 +9,7 @@
     "immutable": "^3.8.1"
   },
   "peerDependencies": {
-    "slate": ">0.22.x"
+    "slate": "0.23.x"
   },
   "devDependencies": {
     "ava": "^0.22.0",
