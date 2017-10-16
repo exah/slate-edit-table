@@ -18,7 +18,7 @@ const schema = {
     nodes: {
         table: props => <table><tbody {...props.attributes}>{props.children}</tbody></table>,
         table_row: props => <tr {...props.attributes}>{props.children}</tr>,
-        table_cell: props => {
+        table_cell: (props) => {
             const align = props.node.get('data').get('align') || 'left';
             return <td style={{ textAlign: align }} {...props.attributes}>{props.children}</td>;
         },
@@ -34,9 +34,9 @@ const Example = React.createClass({
         };
     },
 
-    onChange(state) {
+    onChange(change) {
         this.setState({
-            state
+            state: change.state
         });
     },
 
@@ -45,7 +45,6 @@ const Example = React.createClass({
 
         this.onChange(
             tablePlugin.changes.insertTable(state.change())
-                .apply()
         );
     },
 
@@ -54,7 +53,6 @@ const Example = React.createClass({
 
         this.onChange(
             tablePlugin.changes.insertColumn(state.change())
-                .apply()
         );
     },
 
@@ -63,7 +61,6 @@ const Example = React.createClass({
 
         this.onChange(
             tablePlugin.changes.insertRow(state.change())
-                .apply()
         );
     },
 
@@ -72,7 +69,6 @@ const Example = React.createClass({
 
         this.onChange(
             tablePlugin.changes.removeColumn(state.change())
-                .apply()
         );
     },
 
@@ -81,7 +77,6 @@ const Example = React.createClass({
 
         this.onChange(
             tablePlugin.changes.removeRow(state.change())
-                .apply()
         );
     },
 
@@ -90,7 +85,6 @@ const Example = React.createClass({
 
         this.onChange(
             tablePlugin.changes.removeTable(state.change())
-                .apply()
         );
     },
 
@@ -99,7 +93,6 @@ const Example = React.createClass({
 
         this.onChange(
             tablePlugin.changes.setColumnAlign(state.change(), align)
-                .apply()
         );
     },
 

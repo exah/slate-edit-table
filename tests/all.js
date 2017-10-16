@@ -17,13 +17,13 @@ describe('slate-edit-table', function() {
             const dir = path.resolve(__dirname, test);
             const input = readMetadata.sync(path.resolve(dir, 'input.yaml'));
             const expected = readMetadata.sync(path.resolve(dir, 'expected.yaml'));
-            const runTransform = require(path.resolve(dir, 'change.js'));
+            const runTransform = require(path.resolve(dir, 'transform.js'));
 
             const stateInput = Slate.Raw.deserialize(input, { terse: true });
 
-            const newState = runTransform(plugin, stateInput);
+            const change = runTransform(plugin, stateInput);
 
-            const newDocJSon = Slate.Raw.serialize(newState, { terse: true });
+            const newDocJSon = Slate.Raw.serialize(change.state, { terse: true });
 
             expect(newDocJSon).toEqual(expected);
         });

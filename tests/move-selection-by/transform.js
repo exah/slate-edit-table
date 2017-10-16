@@ -7,11 +7,11 @@ module.exports = function(plugin, state) {
     state = change
         .moveToRangeOf(cursorBlock)
         .move(offset)
-        .apply();
+        ;
 
     state = plugin.changes
         .moveSelectionBy(state.change(), -1, -1)
-        .apply();
+        ;
 
     expect(state.startBlock.text).toEqual('Col 0, Row 0');
     const selection = state.selection;

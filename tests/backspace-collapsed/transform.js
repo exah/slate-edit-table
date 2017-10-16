@@ -5,7 +5,7 @@ module.exports = function(plugin, state) {
 
     const withCursor = state.change()
         .collapseToStartOf(blockStart)
-        .apply();
+        ;
 
     const result = plugin.onKeyDown(
         {

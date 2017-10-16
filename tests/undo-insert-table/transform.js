@@ -7,11 +7,11 @@ module.exports = function(plugin, state) {
     state = change
         .moveToRangeOf(cursorBlock)
         .move(6) // Cursor here: Before|After
-        .apply();
+        ;
 
-    state = plugin.changes.insertTable(state.change()).apply();
+    state = plugin.changes.insertTable(state.change());
 
-    state = state.change().undo().apply();
+    state = state.change().undo();
 
     // Back to previous cursor position
     expect(state.startBlock.text).toEqual('BeforeAfter');

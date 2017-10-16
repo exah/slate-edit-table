@@ -4,8 +4,8 @@ module.exports = function(plugin, state) {
     state = change
         .moveToRangeOf(cursorBlock)
         .move(6) // Cursor here: Before|After
-        .apply();
+        ;
 
     return plugin.changes.insertTable(state.change())
-        .apply();
+        ;
 };
