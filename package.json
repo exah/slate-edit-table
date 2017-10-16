@@ -9,7 +9,7 @@
     "immutable": "^3.8.1"
   },
   "peerDependencies": {
-    "slate": "0.x.x"
+    "slate": "0.22.x"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
@@ -29,7 +29,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "read-metadata": "^1.0.0",
-    "slate": "^0.20.6",
+    "slate": "0.22",
     "watchify": "^3.7.0"
   },
   "scripts": {
