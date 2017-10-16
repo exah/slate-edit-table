@@ -44,7 +44,7 @@ const Example = React.createClass({
         const { state } = this.state;
 
         this.onChange(
-            tablePlugin.transforms.insertTable(state.transform())
+            tablePlugin.changes.insertTable(state.change())
                 .apply()
         );
     },
@@ -53,7 +53,7 @@ const Example = React.createClass({
         const { state } = this.state;
 
         this.onChange(
-            tablePlugin.transforms.insertColumn(state.transform())
+            tablePlugin.changes.insertColumn(state.change())
                 .apply()
         );
     },
@@ -62,7 +62,7 @@ const Example = React.createClass({
         const { state } = this.state;
 
         this.onChange(
-            tablePlugin.transforms.insertRow(state.transform())
+            tablePlugin.changes.insertRow(state.change())
                 .apply()
         );
     },
@@ -71,7 +71,7 @@ const Example = React.createClass({
         const { state } = this.state;
 
         this.onChange(
-            tablePlugin.transforms.removeColumn(state.transform())
+            tablePlugin.changes.removeColumn(state.change())
                 .apply()
         );
     },
@@ -80,7 +80,7 @@ const Example = React.createClass({
         const { state } = this.state;
 
         this.onChange(
-            tablePlugin.transforms.removeRow(state.transform())
+            tablePlugin.changes.removeRow(state.change())
                 .apply()
         );
     },
@@ -89,7 +89,7 @@ const Example = React.createClass({
         const { state } = this.state;
 
         this.onChange(
-            tablePlugin.transforms.removeTable(state.transform())
+            tablePlugin.changes.removeTable(state.change())
                 .apply()
         );
     },
@@ -98,7 +98,7 @@ const Example = React.createClass({
         const { state } = this.state;
 
         this.onChange(
-            tablePlugin.transforms.setColumnAlign(state.transform(), align)
+            tablePlugin.changes.setColumnAlign(state.change(), align)
                 .apply()
         );
     },

@@ -3,14 +3,14 @@ const expect = require('expect');
 module.exports = function(plugin, state) {
     const cursorBlock = state.document.getDescendant('_cursor_');
     const offset = 2;
-    const transform = state.transform();
-    state = transform
+    const change = state.change();
+    state = change
         .moveToRangeOf(cursorBlock)
         .move(offset)
         .apply();
 
-    state = plugin.transforms
-        .moveSelectionBy(state.transform(), -1, -1)
+    state = plugin.changes
+        .moveSelectionBy(state.change(), -1, -1)
         .apply();
 
     expect(state.startBlock.text).toEqual('Col 0, Row 0');

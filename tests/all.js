@@ -17,7 +17,7 @@ describe('slate-edit-table', function() {
             const dir = path.resolve(__dirname, test);
             const input = readMetadata.sync(path.resolve(dir, 'input.yaml'));
             const expected = readMetadata.sync(path.resolve(dir, 'expected.yaml'));
-            const runTransform = require(path.resolve(dir, 'transform.js'));
+            const runTransform = require(path.resolve(dir, 'change.js'));
 
             const stateInput = Slate.Raw.deserialize(input, { terse: true });
 

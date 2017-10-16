@@ -1,11 +1,11 @@
 module.exports = function(plugin, state) {
-    let transform = state.transform();
+    let change = state.change();
 
     const cursorBlock = state.document.getDescendant('_cursor_1');
-    state = transform.moveToRangeOf(cursorBlock).apply();
-    transform = plugin.transforms.setColumnAlign(state.transform(), 'center');
+    state = change.moveToRangeOf(cursorBlock).apply();
+    change = plugin.changes.setColumnAlign(state.change(), 'center');
 
     const cursorBlock2 = state.document.getDescendant('_cursor_2');
-    state = transform.moveToRangeOf(cursorBlock2).apply();
-    return plugin.transforms.setColumnAlign(state.transform(), 'right').apply();
+    state = change.moveToRangeOf(cursorBlock2).apply();
+    return plugin.changes.setColumnAlign(state.change(), 'right').apply();
 };
