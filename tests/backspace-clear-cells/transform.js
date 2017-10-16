@@ -4,8 +4,7 @@ module.exports = function(plugin, state) {
 
     const withCursor = state.change()
         .collapseToStartOf(blockStart)
-        .extendToEndOf(blockEnd)
-        ;
+        .extendToEndOf(blockEnd);
 
     return plugin.onKeyDown(
         {

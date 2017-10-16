@@ -3,11 +3,8 @@ module.exports = function(plugin, state) {
     const cursorBlock = state.document.getDescendant('_cursor_');
     const change = state.change();
 
-    state = change.moveToRangeOf(cursorBlock);
+    change.moveToRangeOf(cursorBlock);
+    plugin.changes.removeRow(change);
 
-    state = plugin.changes.removeRow(state.change());
-
-    state = state.change().undo();
-
-    return state;
+    return change.undo();
 };

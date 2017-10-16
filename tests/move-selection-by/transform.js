@@ -4,20 +4,18 @@ module.exports = function(plugin, state) {
     const cursorBlock = state.document.getDescendant('_cursor_');
     const offset = 2;
     const change = state.change();
-    state = change
+    change
         .moveToRangeOf(cursorBlock)
-        .move(offset)
-        ;
+        .move(offset);
 
-    state = plugin.changes
-        .moveSelectionBy(state.change(), -1, -1)
-        ;
+    plugin.changes
+        .moveSelectionBy(change, -1, -1);
 
-    expect(state.startBlock.text).toEqual('Col 0, Row 0');
-    const selection = state.selection;
+    expect(change.state.startBlock.text).toEqual('Col 0, Row 0');
+    const selection = change.state.selection;
     expect(selection.startKey).toEqual(selection.endKey);
     // Keep same offset
     expect(selection.startOffset).toEqual(offset);
 
-    return state;
+    return change;
 };

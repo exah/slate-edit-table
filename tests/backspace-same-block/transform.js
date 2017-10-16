@@ -4,10 +4,9 @@ module.exports = function(plugin, state) {
     const blockStart = state.document.getDescendant('anchor');
     const blockEnd = state.document.getDescendant('anchor');
 
-    const withCursor = state.change()
+    const change = state.change()
         .collapseToStartOf(blockStart)
-        .extendToEndOf(blockEnd)
-        ;
+        .extendToEndOf(blockEnd);
 
     const result = plugin.onKeyDown(
         {
@@ -15,10 +14,10 @@ module.exports = function(plugin, state) {
             stopPropagation() {}
         },
         { key: 'backspace' },
-        withCursor
+        change
     );
 
     expect(result).toBe(undefined);
 
-    return state;
+    return change;
 };
