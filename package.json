@@ -7,8 +7,8 @@
   "main": "./dist/index.js",
   "peerDependencies": {
     "immutable": "^3.8.1",
-    "slate": "0.24.x || 0.25.x",
-    "slate-react": "0.1.x || 0.2.x"
+    "slate": "0.24.x || 0.25.x || 0.26.x",
+    "slate-react": "0.1.x || 0.2.x || 0.3.x"
   },
   "devDependencies": {
     "ava": "^0.22.0",
@@ -37,8 +37,8 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "read-metadata": "^1.0.0",
-    "slate": "0.25",
-    "slate-react": "0.2",
+    "slate": "0.26.x",
+    "slate-react": "0.3.x",
     "watchify": "^3.7.0"
   },
   "scripts": {
