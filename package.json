@@ -40,6 +40,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "read-metadata": "^1.0.0",
+    "rimraf": "^2.6.2",
     "slate": "0.26.x",
     "slate-react": "0.3.x",
     "watchify": "^3.7.0"
@@ -62,7 +63,8 @@
     "deploy": "np --any-branch",
     "postdeploy": "npm run gh-pages",
     "preversion": "npm run build:module",
-    "pregh-pages": "npm run build:example"
+    "pregh-pages": "npm run build:example",
+    "prebuild": "rimraf dist"
   },
   "ava": {
     "files": [
