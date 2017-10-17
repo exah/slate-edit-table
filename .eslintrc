@@ -1,9 +1,6 @@
 {
-    "extends": "gitbook",
-    "env": {
-        "mocha": true
-    },
-    "rules": {
-        "react/prop-types": 0
-    }
+  "extends": "strelka/react",
+  "rules": {
+    "react/display-name": 0
+  }
 }
