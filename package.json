@@ -6,9 +6,9 @@
   "repository": "exah/slate-edit-table",
   "main": "./dist/index.js",
   "peerDependencies": {
-    "slate": "0.24.x",
-    "slate-react": "0.1.x",
-    "immutable": "^3.8.1"
+    "immutable": "^3.8.1",
+    "slate": "0.24.x || 0.25.x",
+    "slate-react": "0.1.x || 0.2.x"
   },
   "devDependencies": {
     "ava": "^0.22.0",
@@ -37,8 +37,8 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "read-metadata": "^1.0.0",
-    "slate": "0.24",
-    "slate-react": "0.1.0",
+    "slate": "0.25",
+    "slate-react": "0.2",
     "watchify": "^3.7.0"
   },
   "scripts": {
