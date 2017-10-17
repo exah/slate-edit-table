@@ -1,7 +1,8 @@
 const React = require('react')
 const createReactClass = require('create-react-class')
 const ReactDOM = require('react-dom')
-const Slate = require('slate')
+const { State } = require('slate')
+const { Editor } = require('slate-react')
 const PluginEditTable = require('../lib/')
 
 const stateJson = require('./state')
@@ -31,7 +32,7 @@ const schema = {
 const Example = createReactClass({
   getInitialState () {
     return {
-      state: Slate.State.fromJSON(stateJson)
+      state: State.fromJSON(stateJson)
     }
   },
 
@@ -130,7 +131,7 @@ const Example = createReactClass({
     return (
       <div>
         {isTable ? this.renderTableToolbar() : this.renderNormalToolbar()}
-        <Slate.Editor
+        <Editor
           placeholder={'Enter some text...'}
           plugins={plugins}
           state={state}

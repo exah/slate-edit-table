@@ -5,12 +5,10 @@
   "license": "Apache-2.0",
   "repository": "exah/slate-edit-table",
   "main": "./dist/index.js",
-  "dependencies": {
-    "create-react-class": "^15.6.2",
-    "immutable": "^3.8.1"
-  },
   "peerDependencies": {
-    "slate": "0.23.x"
+    "slate": "0.24.x",
+    "slate-react": "0.1.x",
+    "immutable": "^3.8.1"
   },
   "devDependencies": {
     "ava": "^0.22.0",
@@ -20,6 +18,7 @@
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
+    "create-react-class": "^15.6.2",
     "eslint": "^4.9.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-config-standard-jsx": "^4.0.2",
@@ -32,12 +31,14 @@
     "expect": "^21.2.1",
     "gh-pages": "^1.0.0",
     "http-server": "^0.10.0",
+    "immutable": "^3.8.1",
     "np": "^2.16.0",
     "npm-run-all": "^4.0.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "read-metadata": "^1.0.0",
-    "slate": "0.23.1",
+    "slate": "0.24",
+    "slate-react": "0.1.0",
     "watchify": "^3.7.0"
   },
   "scripts": {
