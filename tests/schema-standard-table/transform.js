@@ -1,8 +1,7 @@
-const Slate = require('slate');
+const Slate = require('slate')
 
-module.exports = function(plugin, state) {
-    const schema = new Slate.Schema(plugin.schema);
-    return state.change()
-        .normalize(schema)
-        ;
-};
+module.exports = function (plugin, state) {
+  const schema = new Slate.Schema(plugin.schema)
+  return state.change()
+    .normalize(schema)
+}

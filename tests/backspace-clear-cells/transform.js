@@ -1,17 +1,17 @@
-module.exports = function(plugin, state) {
-    const blockStart = state.document.getDescendant('anchor');
-    const blockEnd = state.document.getDescendant('focus');
+module.exports = function (plugin, state) {
+  const blockStart = state.document.getDescendant('anchor')
+  const blockEnd = state.document.getDescendant('focus')
 
-    const withCursor = state.change()
-        .collapseToStartOf(blockStart)
-        .extendToEndOf(blockEnd);
+  const withCursor = state.change()
+    .collapseToStartOf(blockStart)
+    .extendToEndOf(blockEnd)
 
-    return plugin.onKeyDown(
-        {
-            preventDefault() {},
-            stopPropagation() {}
-        },
-        { key: 'backspace' },
-        withCursor
-    );
-};
+  return plugin.onKeyDown(
+    {
+      preventDefault () {},
+      stopPropagation () {}
+    },
+    { key: 'backspace' },
+    withCursor
+  )
+}

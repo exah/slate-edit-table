@@ -1,20 +1,20 @@
-const expect = require('expect');
+const expect = require('expect')
 
-module.exports = function(plugin, state) {
-    const blockStart = state.document.getDescendant('anchor');
+module.exports = function (plugin, state) {
+  const blockStart = state.document.getDescendant('anchor')
 
-    const change = state.change()
-        .collapseToStartOf(blockStart);
+  const change = state.change()
+    .collapseToStartOf(blockStart)
 
-    const result = plugin.onKeyDown(
-        {
-            preventDefault() {},
-            stopPropagation() {}
-        },
-        { key: 'backspace' },
-        change
-    );
+  const result = plugin.onKeyDown(
+    {
+      preventDefault () {},
+      stopPropagation () {}
+    },
+    { key: 'backspace' },
+    change
+  )
 
-    expect(result).toBe(undefined);
-    return change;
-};
+  expect(result).toBe(undefined)
+  return change
+}

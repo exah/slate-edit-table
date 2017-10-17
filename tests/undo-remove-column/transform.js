@@ -1,10 +1,10 @@
 
-module.exports = function(plugin, state) {
-    const cursorBlock = state.document.getDescendant('_cursor_');
-    const change = state.change();
+module.exports = function (plugin, state) {
+  const cursorBlock = state.document.getDescendant('_cursor_')
+  const change = state.change()
 
-    change.moveToRangeOf(cursorBlock);
-    plugin.changes.removeColumn(change);
+  change.moveToRangeOf(cursorBlock)
+  plugin.changes.removeColumn(change)
 
-    return change.undo();
-};
+  return change.undo()
+}
