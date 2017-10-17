@@ -7,7 +7,7 @@ A Slate plugin to handle table edition.
 ### Install
 
 ```
-npm install @exah/slate-edit-table
+npm install @strelka/slate-edit-table
 ```
 
 ### Features
@@ -20,7 +20,7 @@ npm install @exah/slate-edit-table
 ### Simple Usage
 
 ```js
-import EditTable from '@exah/slate-edit-table'
+import EditTable from '@strelka/slate-edit-table'
 
 const plugins = [
   EditTable()
