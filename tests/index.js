@@ -1,7 +1,7 @@
 const test = require('ava')
 const fs = require('fs')
 const path = require('path')
-const { State } = require('slate')
+const { Value } = require('slate')
 const readMetadata = require('read-metadata')
 
 const EditList = require('../lib')
@@ -16,7 +16,7 @@ tests.filter(testName => testName !== 'snapshots').forEach((testName) => {
     const doc = readMetadata.sync(resolve(testName, 'input.yaml'))
     const runChange = require(resolve(testName, 'transform.js'))
 
-    const state = State.fromJSON(doc)
+    const state = Value.fromJSON(doc)
     const change = runChange(plugin, state)
     const changedDoc = change.state.toJSON()
 
