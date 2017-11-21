@@ -1,16 +1,16 @@
 const expect = require('expect')
 
-module.exports = function (plugin, state) {
-  const cursorBlock = state.document.getDescendant('_cursor_')
-  const initial = state.change({ save: false })
+module.exports = function (plugin, value) {
+  const cursorBlock = value.document.getDescendant('_cursor_')
+  const initial = value.change({ save: false })
   initial.moveToRangeOf(cursorBlock)
 
-  const toTest = initial.state.change()
+  const toTest = initial.value.change()
   plugin.changes.insertRow(toTest)
   toTest.undo()
 
   // Back to previous cursor position
-  expect(toTest.state.startBlock.text).toEqual('Col 1, Row 1')
+  expect(toTest.value.startBlock.text).toEqual('Col 1, Row 1')
 
   return toTest
 }

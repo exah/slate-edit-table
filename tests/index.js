@@ -16,9 +16,9 @@ tests.filter(testName => testName !== 'snapshots').forEach((testName) => {
     const doc = readMetadata.sync(resolve(testName, 'input.yaml'))
     const runChange = require(resolve(testName, 'transform.js'))
 
-    const state = Value.fromJSON(doc)
-    const change = runChange(plugin, state)
-    const changedDoc = change.state.toJSON()
+    const value = Value.fromJSON(doc)
+    const change = runChange(plugin, value)
+    const changedDoc = change.value.toJSON()
 
     t.snapshot(changedDoc)
   })

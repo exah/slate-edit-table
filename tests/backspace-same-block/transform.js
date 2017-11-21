@@ -1,10 +1,10 @@
 const expect = require('expect')
 
-module.exports = function (plugin, state) {
-  const blockStart = state.document.getDescendant('anchor')
-  const blockEnd = state.document.getDescendant('anchor')
+module.exports = function (plugin, value) {
+  const blockStart = value.document.getDescendant('anchor')
+  const blockEnd = value.document.getDescendant('anchor')
 
-  const change = state.change()
+  const change = value.change()
     .collapseToStartOf(blockStart)
     .extendToEndOf(blockEnd)
 

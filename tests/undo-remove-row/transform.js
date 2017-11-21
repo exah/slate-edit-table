@@ -1,7 +1,7 @@
 
-module.exports = function (plugin, state) {
-  const cursorBlock = state.document.getDescendant('_cursor_')
-  const change = state.change()
+module.exports = function (plugin, value) {
+  const cursorBlock = value.document.getDescendant('_cursor_')
+  const change = value.change()
 
   change.moveToRangeOf(cursorBlock)
   plugin.changes.removeRow(change)

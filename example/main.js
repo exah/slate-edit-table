@@ -1,11 +1,11 @@
 const React = require('react')
 const createReactClass = require('create-react-class')
 const ReactDOM = require('react-dom')
-const { State } = require('slate')
+const { Value } = require('slate')
 const { Editor } = require('slate-react')
 const PluginEditTable = require('../lib/')
 
-const stateJson = require('./state')
+const valueJson = require('./value')
 
 const tablePlugin = PluginEditTable({
   onTabCreateRow: false,
@@ -20,10 +20,7 @@ const schema = {
   nodes: {
     table: props => <table><tbody {...props.attributes}>{props.children}</tbody></table>,
     table_row: props => <tr {...props.attributes}>{props.children}</tr>,
-    table_cell: (props) => {
-      const align = props.node.get('data').get('align') || 'left'
-      return <td style={{ textAlign: align }} {...props.attributes}>{props.children}</td>
-    },
+    table_cell: (props) => <td {...props.attributes}>{props.children}</td>,
     paragraph: props => <p {...props.attributes}>{props.children}</p>,
     heading: props => <h1 {...props.attributes}>{props.children}</h1>
   }
@@ -32,72 +29,62 @@ const schema = {
 const Example = createReactClass({
   getInitialState () {
     return {
-      state: State.fromJSON(stateJson)
+      value: Value.fromJSON(valueJson)
     }
   },
 
   handleChange (change) {
     this.setState({
-      state: change.state
+      value: change.value
     })
   },
 
   handleInsertTable () {
-    const { state } = this.state
+    const { value } = this.state
 
     this.handleChange(
-      tablePlugin.changes.insertTable(state.change())
+      tablePlugin.changes.insertTable(value.change())
     )
   },
 
   handleInsertColumn () {
-    const { state } = this.state
+    const { value } = this.state
 
     this.handleChange(
-      tablePlugin.changes.insertColumn(state.change())
+      tablePlugin.changes.insertColumn(value.change())
     )
   },
 
   handleInsertRow () {
-    const { state } = this.state
+    const { value } = this.state
 
     this.handleChange(
-      tablePlugin.changes.insertRow(state.change())
+      tablePlugin.changes.insertRow(value.change())
     )
   },
 
   handleRemoveColumn () {
-    const { state } = this.state
+    const { value } = this.state
 
     this.handleChange(
-      tablePlugin.changes.removeColumn(state.change())
+      tablePlugin.changes.removeColumn(value.change())
     )
   },
 
   handleRemoveRow () {
-    const { state } = this.state
+    const { value } = this.state
 
     this.handleChange(
-      tablePlugin.changes.removeRow(state.change())
+      tablePlugin.changes.removeRow(value.change())
     )
   },
 
   handleRemoveTable () {
-    const { state } = this.state
+    const { value } = this.state
 
     this.handleChange(
-      tablePlugin.changes.removeTable(state.change())
+      tablePlugin.changes.removeTable(value.change())
     )
-  },
-
-  handleAlign (align) {
-    return (event) => {
-      const { state } = this.state
-
-      this.handleChange(
-        tablePlugin.changes.setColumnAlign(state.change(), align)
-      )
-    }
   },
 
   renderNormalToolbar () {
@@ -116,17 +103,13 @@ const Example = createReactClass({
         <button onClick={this.handleRemoveColumn}>Remove Column</button>
         <button onClick={this.handleRemoveRow}>Remove Row</button>
         <button onClick={this.handleRemoveTable}>Remove Table</button>
-        <br />
-        <button onClick={this.handleAlign('left')}>Set align left</button>
-        <button onClick={this.handleAlign('center')}>Set align center</button>
-        <button onClick={this.handleAlign('right')}>Set align right</button>
       </div>
     )
   },
 
   render () {
-    const { state } = this.state
-    const isTable = tablePlugin.utils.isSelectionInTable(state)
+    const { value } = this.state
+    const isTable = tablePlugin.utils.isSelectionInTable(value)
 
     return (
       <div>
@@ -134,7 +117,7 @@ const Example = createReactClass({
         <Editor
           placeholder={'Enter some text...'}
           plugins={plugins}
-          state={state}
+          value={value}
           onChange={this.handleChange}
           schema={schema}
         />
