@@ -4,6 +4,7 @@ const ReactDOM = require('react-dom')
 const { Value } = require('slate')
 const { Editor } = require('slate-react')
 const PluginEditTable = require('../lib/')
+const { legacySchema } = require('../lib/compat')
 
 const valueJson = require('./value')
 
@@ -16,7 +17,7 @@ const plugins = [
   tablePlugin
 ]
 
-const schema = {
+const schemaProps = legacySchema({
   nodes: {
     table: props => <table><tbody {...props.attributes}>{props.children}</tbody></table>,
     table_row: props => <tr {...props.attributes}>{props.children}</tr>,
@@ -24,7 +25,7 @@ const schema = {
     paragraph: props => <p {...props.attributes}>{props.children}</p>,
     heading: props => <h1 {...props.attributes}>{props.children}</h1>
   }
-}
+})
 
 const Example = createReactClass({
   getInitialState () {
@@ -119,7 +120,7 @@ const Example = createReactClass({
           plugins={plugins}
           value={value}
           onChange={this.handleChange}
-          schema={schema}
+          {...schemaProps}
         />
       </div>
     )

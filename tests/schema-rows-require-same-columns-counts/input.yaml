@@ -2,11 +2,6 @@ document:
   nodes:
     - kind: block
       type: table
-      data:
-          align:
-              - left
-              - left
-              - left
       nodes:
         # Row 1
         - kind: block

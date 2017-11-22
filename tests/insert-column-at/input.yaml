@@ -2,10 +2,6 @@ document:
   nodes:
     - kind: block
       type: table
-      data:
-        align:
-          - center
-          - center
       nodes:
         - kind: block
           type: table_row
