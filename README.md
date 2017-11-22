@@ -13,9 +13,6 @@ npm install @strelka/slate-edit-table
 ### Features
 
 - Pressing <kbd>Up</kbd> and <kbd>Down</kbd>, move the cursor to next/previous row
-- Pressing <kbd>Enter</kbd>, insert a new row
-- Pressing <kbd>Tab</kbd>, move the select to next cell
-- Pressing <kbd>Shift+Tab</kbd>, move the select to previous cell
 
 ### Simple Usage
 
@@ -30,8 +27,9 @@ const plugins = [
 #### Arguments
 
 - ``[typeTable: String]`` — type for table
-- ``[typeRow: String]`` — type for the rows.
-- ``[typeCell: String]`` — type for the cells.
+- ``[typeRow: String]`` — type for the rows
+- ``[typeCell: String]`` — type for the cells
+- ``[typeDefault: String]`` — type for cell content (default to `paragraph`)
 
 ### Utilities and Transform
 
