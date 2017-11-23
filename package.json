@@ -72,5 +72,8 @@
   },
   "keywords": [
     "slate"
-  ]
+  ],
+  "dependencies": {
+    "is-hotkey": "^0.1.1"
+  }
 }

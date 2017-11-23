@@ -8,11 +8,8 @@ const { legacySchema } = require('../lib/compat')
 
 const valueJson = require('./value')
 
-const tablePlugin = PluginEditTable({
-  onTabCreateRow: false,
-  onEnterCreateRow: false,
-  typeDefault: 'paragraph'
-})
+const tablePlugin = PluginEditTable()
+
 const plugins = [
   tablePlugin
 ]
