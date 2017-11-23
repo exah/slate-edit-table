@@ -4,7 +4,7 @@ const ReactDOM = require('react-dom')
 const { Value } = require('slate')
 const { Editor } = require('slate-react')
 const PluginEditTable = require('../lib/')
-const { legacySchema } = require('../lib/compat')
+const { legacySchema } = require('../lib/utils/compat')
 
 const valueJson = require('./value')
 
