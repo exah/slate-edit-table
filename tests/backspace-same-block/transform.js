@@ -5,8 +5,8 @@ module.exports = function (plugin, value) {
   const blockEnd = value.document.getDescendant('anchor')
 
   const change = value.change()
-    .collapseToStartOf(blockStart)
-    .extendToEndOf(blockEnd)
+    .moveToStartOfNode(blockStart)
+    .moveFocusToEndOfNode(blockEnd)
 
   const result = plugin.onKeyDown(
     {

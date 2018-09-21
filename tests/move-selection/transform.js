@@ -6,17 +6,17 @@ module.exports = function (plugin, value) {
   const change = value.change()
 
   change
-    .moveToRangeOf(cursorBlock)
-    .move(offset)
+    .moveToRangeOfNode(cursorBlock)
+    .moveForward(offset)
 
   plugin.changes
     .moveSelection(change, 2, 2)
 
   expect(change.value.startBlock.text).toEqual('Col 2, Row 2')
   const selection = change.value.selection
-  expect(selection.startKey).toEqual(selection.endKey)
+  expect(selection.start.key).toEqual(selection.end.key)
   // Keep same offset
-  expect(selection.startOffset).toEqual(offset)
+  expect(selection.start.offset).toEqual(offset)
 
   return change
 }

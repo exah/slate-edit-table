@@ -4,7 +4,7 @@ module.exports = function (plugin, value) {
   const blockStart = value.document.getDescendant('anchor')
 
   const change = value.change()
-    .collapseToStartOf(blockStart)
+    .moveToStartOfNode(blockStart)
 
   const result = plugin.onKeyDown(
     {
